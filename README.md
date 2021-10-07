@@ -11,3 +11,6 @@ Simple password manager created with Python, GUI with tkinter. Data is stored lo
 * Press "Search" to search the accounts by the "For" field
 * In the accounts table down below press on the buttons in the "Email/Username" or "Password" columns to copy them
 * Press "Delete" to delete an account
+
+## Setup
+Get the latest realease and open the executable
