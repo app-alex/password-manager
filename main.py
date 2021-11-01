@@ -143,7 +143,7 @@ def copy_button(content):
     window.clipboard_append(content)
 
 
-def update_table():
+def update_table(e=None):
     find_password()
     table_show()
 
@@ -238,5 +238,7 @@ update_table()
 
 table_canvas.create_window((0, 0), window=frame_table, anchor="nw")
 window.bind("<Configure>", resize_table)
+
+window.bind("<Return>", update_table)
 
 window.mainloop()
