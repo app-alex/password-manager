@@ -10,9 +10,13 @@ table_widget = []
 is_table = False
 is_table_shown = False
 
-with open("email.txt", "r") as data_file:
-    default_email = data_file.read()
-
+try:
+    with open("email.txt", "r") as data_file:
+        default_email = data_file.read()
+except FileNotFoundError:
+    default_email = ""
+    with open("email.txt", "w") as data_file:
+        pass
 
 def generate_password():
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
