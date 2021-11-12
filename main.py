@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+from ttkbootstrap import Style
 from random import choice, randint, shuffle
 import pyperclip
 import json
@@ -134,7 +135,7 @@ def table_show():
         temp_list.append(Button(frame_table, text="Copy", borderwidth=1, relief="ridge", command=lambda x=account["password"]: copy_button(x)))
         temp_list[2].grid(sticky="we", row=row_position+grid_offset, column=2)
 
-        temp_list.append(Button(frame_table, text="Delete", width=5, borderwidth=1, relief="ridge", command=lambda x=account: delete_account(x)))
+        temp_list.append(Button(frame_table, text="Delete", borderwidth=1, relief="ridge", command=lambda x=account: delete_account(x)))
         temp_list[3].grid(sticky="we", row=row_position + grid_offset, column=3)
 
         table_widget.append(temp_list)
@@ -171,7 +172,10 @@ def resize_table(e):
     table_canvas.config(scrollregion=frame_table.bbox())
 
 
-window = Tk()
+style = Style(theme='darkly')
+window = style.master
+window.option_add("*Font", "Helvetica 9")
+
 window.title("Password Manager")
 window.config(padx=50, pady=50)
 window.resizable(width=False, height=False)
@@ -190,13 +194,13 @@ spacing.grid(row=2, column=0)
 
 # Labels
 website_label = Label(main_frame, text="For:")
-website_label.grid(sticky="we", row=1, column=0)
+website_label.grid(sticky="e", row=1, column=0)
 
 email_label = Label(main_frame, text="Email/Username:")
-email_label.grid(sticky="we", row=2, column=0)
+email_label.grid(sticky="e", row=2, column=0)
 
 password_label = Label(main_frame, text="Password:")
-password_label.grid(sticky="we", row=3, column=0)
+password_label.grid(sticky="e", row=3, column=0)
 
 
 # Entries
@@ -213,13 +217,13 @@ password_entry.grid(sticky="wesn", row=3, column=1)
 
 
 # Buttons
-search_button = Button(main_frame, text="Search", command=update_table)
+search_button = Button(main_frame, text="Search", borderwidth=1, relief="ridge", command=update_table)
 search_button.grid(sticky="we", row=1, column=2)
 
-generate_password_button = Button(main_frame, text="Generate Password", command=generate_password)
+generate_password_button = Button(main_frame, text="Generate Password", borderwidth=1, relief="ridge", command=generate_password)
 generate_password_button.grid(sticky="we", row=3, column=2)
 
-add_button = Button(main_frame, text="Add", command=save)
+add_button = Button(main_frame, text="Add", borderwidth=1, relief="ridge", command=save)
 add_button.grid(sticky="we", row=4, column=1, columnspan=2)
 
 
