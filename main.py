@@ -41,10 +41,12 @@ def save():
 
     website = website_entry.get()
     email = email_entry.get()
+    user = user_entry.get()
     password = password_entry.get()
     new_data = {
         "website": website,
         "email": email,
+        "user": user,
         "password": password
     }
 
@@ -90,10 +92,12 @@ def find_password():
         for account in data:
             if website.lower() in account["website"].lower():
                 email = account["email"]
+                user = account["user"]
                 password = account["password"]
                 table_dict = {
                     "website": account["website"],
                     "email": email,
+                    "user": user,
                     "password": password
                 }
 
@@ -116,10 +120,15 @@ def table_show():
     head = [Label(frame_table, text="For", width=10, borderwidth=3, relief="ridge", font="Helvetica 10 bold")]
 
     head[0].grid(sticky="wesn", row=row_position + grid_offset, column=0)
-    head.append(Label(frame_table, text="Email/Username", width=15, borderwidth=3, relief="ridge", font="Helvetica 10 bold"))
+
+    head.append(Label(frame_table, text="Email", width=15, borderwidth=3, relief="ridge", font="Helvetica 10 bold"))
     head[1].grid(sticky="wesn", row=row_position + grid_offset, column=1)
-    head.append(Label(frame_table, text="Password", width=10, borderwidth=3, relief="ridge", font="Helvetica 10 bold"))
+
+    head.append(Label(frame_table, text="Username", width=15, borderwidth=3, relief="ridge", font="Helvetica 10 bold"))
     head[2].grid(sticky="wesn", row=row_position + grid_offset, column=2)
+
+    head.append(Label(frame_table, text="Password", width=10, borderwidth=3, relief="ridge", font="Helvetica 10 bold"))
+    head[3].grid(sticky="wesn", row=row_position + grid_offset, column=3)
 
     row_position += 1
     for account in table:
@@ -132,11 +141,14 @@ def table_show():
         temp_list.append(Button(frame_table, text=account["email"], borderwidth=1, relief="ridge", command=lambda x=account["email"]: copy_button(x)))
         temp_list[1].grid(sticky="we", row=row_position+grid_offset, column=1)
 
+        temp_list.append(Button(frame_table, text=account["user"], borderwidth=1, relief="ridge",command=lambda x=account["user"]: copy_button(x)))
+        temp_list[2].grid(sticky="we", row=row_position + grid_offset, column=2)
+
         temp_list.append(Button(frame_table, text="Copy", borderwidth=1, relief="ridge", command=lambda x=account["password"]: copy_button(x)))
-        temp_list[2].grid(sticky="we", row=row_position+grid_offset, column=2)
+        temp_list[3].grid(sticky="we", row=row_position+grid_offset, column=3)
 
         temp_list.append(Button(frame_table, text="Delete", borderwidth=1, relief="ridge", command=lambda x=account: delete_account(x)))
-        temp_list[3].grid(sticky="we", row=row_position + grid_offset, column=3)
+        temp_list[4].grid(sticky="we", row=row_position + grid_offset, column=4)
 
         table_widget.append(temp_list)
 
@@ -196,11 +208,14 @@ spacing.grid(row=2, column=0)
 website_label = Label(main_frame, text="For:")
 website_label.grid(sticky="e", row=1, column=0)
 
-email_label = Label(main_frame, text="Email/Username:")
+email_label = Label(main_frame, text="Email:")
 email_label.grid(sticky="e", row=2, column=0)
 
+user_label = Label(main_frame, text="Username:")
+user_label.grid(sticky="e", row=3, column=0)
+
 password_label = Label(main_frame, text="Password:")
-password_label.grid(sticky="e", row=3, column=0)
+password_label.grid(sticky="e", row=4, column=0)
 
 
 # Entries
@@ -212,8 +227,11 @@ email_entry = Entry(main_frame)
 email_entry.grid(sticky="wesn", row=2, column=1, columnspan=2)
 email_entry.insert(0, default_email)
 
+user_entry = Entry(main_frame)
+user_entry.grid(sticky="wesn", row=3, column=1, columnspan=2)
+
 password_entry = Entry(main_frame)
-password_entry.grid(sticky="wesn", row=3, column=1)
+password_entry.grid(sticky="wesn", row=4, column=1)
 
 
 # Buttons
@@ -221,10 +239,10 @@ search_button = Button(main_frame, text="Search", borderwidth=1, relief="ridge",
 search_button.grid(sticky="we", row=1, column=2)
 
 generate_password_button = Button(main_frame, text="Generate Password", borderwidth=1, relief="ridge", command=generate_password)
-generate_password_button.grid(sticky="we", row=3, column=2)
+generate_password_button.grid(sticky="we", row=4, column=2)
 
 add_button = Button(main_frame, text="Add", borderwidth=1, relief="ridge", command=save)
-add_button.grid(sticky="we", row=4, column=1, columnspan=2)
+add_button.grid(sticky="we", row=5, column=1, columnspan=2)
 
 
 frame_main = Frame(window)
@@ -240,7 +258,7 @@ scrollbar.grid(row=3, column=1, sticky="ns")
 table_canvas.configure(yscrollcommand=scrollbar.set)
 table_canvas.bind('<Configure>', lambda e: table_canvas.configure(scrollregion=table_canvas.bbox("all")))
 
-frame_table = Frame(table_canvas,)
+frame_table = Frame(table_canvas)
 
 update_table()
 
