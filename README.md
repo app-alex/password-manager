@@ -1,5 +1,5 @@
 # PasswordManager
-Simple password manager created with Python, GUI with tkinter. Data is stored locally in a JSON file.
+Simple password manager created with Python, GUI with tkinter. Data is encrypted and stored locally in a JSON file.
 	
 ## Technologies
 * Python 3.9.7  
